@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>ARmotion WiFi – Pembayaran</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;font-family:Segoe UI,Arial}
+body{
+  margin:0;min-height:100vh;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  display:flex;justify-content:center;align-items:center;padding:20px
+}
+.card{
+  width:100%;max-width:460px;background:#fff;border-radius:18px;
+  padding:26px;box-shadow:0 25px 50px rgba(0,0,0,.35)
+}
+h1{text-align:center;margin:0;color:#203a43}
+small{text-align:center;display:block;color:#777;margin-bottom:10px}
+.pay{
+  background:#f4f8fb;padding:14px;border-radius:12px;font-size:14px
+}
+label{display:block;margin-top:12px;font-weight:600}
+input,textarea,select,button{
+  width:100%;padding:10px;margin-top:6px;
+  border-radius:10px;border:1px solid #ccc;font-size:14px
+}
+.preview{
+  margin-top:10px;text-align:center;display:none
+}
+.preview img{
+  max-width:100%;border-radius:10px;border:1px solid #ddd
+}
+button{
+  margin-top:18px;border:none;
+  background:#25D366;color:#fff;font-size:16px;
+  font-weight:bold;cursor:pointer;border-radius:12px
+}
+.note{
+  font-size:12px;color:#555;margin-top:10px
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+<h1>ARmotion WiFi</h1>
+<small>Form Pembayaran Bulanan</small>
+
+<div class="pay">
+<b>Rekening:</b><br>
+SEA BANK 9011 3152 0191<br>
+DANA 0831 1917 4794<br>
+ARmotion WiFi
+</div>
+
+<form id="f">
+<label>Nama</label>
+<input id="nama" required>
+
+<label>Nomor WhatsApp</label>
+<input id="waUser" placeholder="628xxxxxxx" required>
+
+<label>Alamat</label>
+<textarea id="alamat" required></textarea>
+
+<label>Bulan Tagihan</label>
+<input type="month" id="bulan" required>
+
+<label>Tanggal Bayar</label>
+<input type="date" id="tanggal" required>
+
+<label>Metode Pembayaran</label>
+<select id="metode" required>
+<option value="">Pilih</option>
+<option>Transfer SEA BANK</option>
+<option>Transfer DANA</option>
+</select>
+
+<label>Upload Bukti Transfer</label>
+<input type="file" id="bukti" accept="image/*" required>
+
+<div class="preview" id="preview">
+<img id="imgPreview">
+</div>
+
+<button>KIRIM KE ADMIN</button>
+</form>
+
+<div class="note">
+📌 Setelah WhatsApp terbuka, silakan lampirkan foto bukti transfer lalu kirim.
+</div>
+</div>
+
+<script>
+const now=new Date();
+tanggal.value=now.toISOString().split("T")[0];
+bulan.value=now.toISOString().slice(0,7);
+
+bukti.onchange=e=>{
+  const file=e.target.files[0];
+  if(!file) return;
+  imgPreview.src=URL.createObjectURL(file);
+  preview.style.display="block";
+};
+
+f.onsubmit=e=>{
+  e.preventDefault();
+  const waAdmin="089504719252"; // GANTI NOMOR KAMU
+  const msg=
+`📡 PEMBAYARAN WIFI
+Nama: ${nama.value}
+WA: ${waUser.value}
+Alamat: ${alamat.value}
+Bulan: ${bulan.value}
+Tanggal: ${tanggal.value}
+Metode: ${metode.value}
+
+Bukti transfer dilampirkan`;
+  window.open(`https://wa.me/${089504719252}?text=${encodeURIComponent(msg)}`,"_blank");
+};
+</script>
+</body>
+</html>
