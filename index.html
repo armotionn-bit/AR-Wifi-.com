@@ -106,7 +106,7 @@ bukti.onchange=e=>{
 
 f.onsubmit=e=>{
   e.preventDefault();
-  const waAdmin="https://wa.me/6289504719252"; // GANTI NOMOR KAMU
+  const waAdmin="+6289504719252"; // GANTI NOMOR KAMU
   const msg=
 `📡 PEMBAYARAN WIFI
 Nama: ${nama.value}
@@ -117,7 +117,7 @@ Tanggal: ${tanggal.value}
 Metode: ${metode.value}
 
 Bukti transfer dilampirkan`;
-  window.open(`https://wa.me/6289504719252?text=${encodeURIComponent(msg)}`,"_blank");
+ window.open(`https://wa.me/${+6289504719252}?text=${encodeURIComponent(msg)}`,"_blank");
 };
 </script>
 </body>
